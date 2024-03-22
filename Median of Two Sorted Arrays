@@ -1,0 +1,30 @@
+public class Solution {
+    public double FindMedianSortedArrays(int[] nums1, int[] nums2) {
+        int len = nums1.Length + nums2.Length;
+        bool IsEven = (len -1) % 2 == 0;
+        int mid = len / 2;
+        int i = 0, j = 0, count = 0;
+        int last = 0, secondLast = 0;
+
+        while(count <= mid){
+            if (i < nums1.Length && (j >= nums2.Length || nums1[i] < nums2[j])) {
+                last = nums1[i];
+                i++;
+            } else {
+                last = nums2[j];
+                j++;
+            }
+
+        if (count == mid) {
+                if (!IsEven) {
+                    return last;
+                }
+            } else if (count == mid + 1) {
+                return (last + secondLast) / 2.0;
+            }
+
+            count++;           
+        }
+        return -1;
+    }
+}
